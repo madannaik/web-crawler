@@ -2,6 +2,7 @@
 import dotenv from "dotenv"
 import mongoose from "mongoose";
 import { fetchServerandStore } from "./app.js";
+import { clearData } from "./files/clear.js";
 
 dotenv.config({ path: "./config.env" });
 
@@ -14,6 +15,7 @@ mongoose
     })
     .then(() => {
         console.log("Connection successful!");
+        // addHeaderToFile();
         fetchServerandStore(1);
     })
     .catch((err) => {
@@ -22,3 +24,11 @@ mongoose
     });
 
 
+process.on('SIGINT', async function () {
+    console.log("Caught interrupt signal");
+    clearData().then(() => {
+        if (i_should_exit)
+            process.exit();
+    })
+
+});

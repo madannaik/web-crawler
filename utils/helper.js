@@ -10,6 +10,5 @@ const fetchData = async (pageNum) => {
     } catch (error) {
         return error;
     }
-
 }
 export default fetchData
