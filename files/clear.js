@@ -2,11 +2,13 @@ import xljs from "exceljs"
 
 export const clearData = async () => {
     var woorkbook = new xljs.Workbook();
-    const path = "data.xlsx";
+    const path = "./dist/data.xlsx";
     woorkbook.xlsx.readFile(path).then(function () {
         var ws = woorkbook.getWorksheet('Sheet1');
-        woorkbook.removeWorksheetEx(ws);
-        // workbook.removeWorksheet('Sheet1');
-        woorkbook.xlsx.writeFile(path);
-    })
+        ws.spliceColumns(1, 2, 3, 4);
+        woorkbook.xlsx.writeFile(path).then(() => {
+            console.log("file deleted");
+            return true;
+        })
+    });
 }

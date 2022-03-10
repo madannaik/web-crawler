@@ -1,8 +1,9 @@
-
 import dotenv from "dotenv"
 import mongoose from "mongoose";
-import { fetchServerandStore } from "./app.js";
+import { fetchh } from "./app.js";
 import { clearData } from "./files/clear.js";
+import { prepareHeader } from "./utils/prepareHeader.js";
+
 
 dotenv.config({ path: "./config.env" });
 
@@ -15,20 +16,21 @@ mongoose
     })
     .then(() => {
         console.log("Connection successful!");
-        // addHeaderToFile();
-        fetchServerandStore(1);
+        prepareHeader();
+        // fetchServerandStore();
+        fetchh();
+
     })
     .catch((err) => {
         console.log("Cannot connect to database");
         console.log(err);
     });
 
-
-process.on('SIGINT', async function () {
+process.on('SIGINT', function () {
     console.log("Caught interrupt signal");
-    clearData().then(() => {
-        if (i_should_exit)
+    clearData().then(res => {
+        if (res) {
             process.exit();
-    })
-
+        }
+    });
 });
