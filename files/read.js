@@ -9,7 +9,7 @@ export const dumpDataXLXS = (data) => {
             ws.insertRow(2, [element.questionUrl, element.voteCount, element.answers, element.referenceCount])
         });
         woorkbook.xlsx.writeFile(path).then(() => {
-            console.log("file created");
+            console.log("file updated");
         })
     })
 }

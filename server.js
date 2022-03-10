@@ -1,6 +1,6 @@
 import dotenv from "dotenv"
 import mongoose from "mongoose";
-import { fetchh } from "./app.js";
+import { fetchServerandStore } from "./app.js";
 import { clearData } from "./files/clear.js";
 import { prepareHeader } from "./utils/prepareHeader.js";
 
@@ -17,8 +17,7 @@ mongoose
     .then(() => {
         console.log("Connection successful!");
         prepareHeader();
-        // fetchServerandStore();
-        fetchh();
+        fetchServerandStore();
 
     })
     .catch((err) => {
@@ -27,10 +26,6 @@ mongoose
     });
 
 process.on('SIGINT', function () {
-    console.log("Caught interrupt signal");
-    clearData().then(res => {
-        if (res) {
-            process.exit();
-        }
-    });
+    console.log("Check the file for data in dist folder");
+    process.exit();
 });
